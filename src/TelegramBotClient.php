@@ -29,7 +29,7 @@ class TelegramBotClient{
         $body = new \stdClass();
         
         //Setting Body JSON for Rquest
-        $body->id_cache = $idBot;
+        $body->id_bot = $idBot;
 
         $bodyJSON = json_encode($body);
         
@@ -58,7 +58,7 @@ class TelegramBotClient{
         
         $body = new \stdClass();
         
-        $body->id_cache = $idBot;
+        $body->id_bot = $idBot;
         $bodyJSON = json_encode($body);
         
         $headers = ['Content-Type' => 'application/json' ];
@@ -76,7 +76,7 @@ class TelegramBotClient{
         
         $body = new \stdClass();
         
-        $body->id_cache = $idBot;
+        $body->id_bot = $idBot;
         $bodyJSON = json_encode($body);
         
         $headers = ['Content-Type' => 'application/json' ];
@@ -88,16 +88,12 @@ class TelegramBotClient{
        
     }
 
-    public function setBot($idBot,$token_face,$instagram_id,$first_message,$last_message,$num_tags){
+    public function setBot($idBot,$message){
         
         $body = new \stdClass();
         
-        $body->id_cache = $idBot;
-        $body->token_face = $token_face;
-        $body->instagram_id = $instagram_id;
-        $body->first_message = $first_message;
-        $body->last_message = $last_message; 
-        $body->num_tags = $num_tags;
+        $body->id_bot = $idBot;
+        $body->message = $message;
 
         $bodyJSON = json_encode($body);
         
@@ -110,16 +106,16 @@ class TelegramBotClient{
        
     }
 
-    public function deleteCommentsBot($idBot){
+    public function deleteCustomerBot($idBot){
         
         $body = new \stdClass();
         
-        $body->id_cache = $idBot;
+        $body->id_bot = $idBot;
         $bodyJSON = json_encode($body);
         
         $headers = ['Content-Type' => 'application/json' ];
         
-        $request = new Request('DELETE', '/bot/comments/id', $headers, $bodyJSON);
+        $request = new Request('DELETE', '/bot/customer/id', $headers, $bodyJSON);
         $response = $this->client->send($request);
     
         return $response->getBody()->getContents();  
@@ -130,12 +126,12 @@ class TelegramBotClient{
         
         $body = new \stdClass();
         
-        $body->id_cache = $idBot;
+        $body->id_bot = $idBot;
         $bodyJSON = json_encode($body);
         
         $headers = ['Content-Type' => 'application/json' ];
         
-        $request = new Request('DELETE', '/bot/user/idbot', $headers, $bodyJSON);
+        $request = new Request('DELETE', '/bot/user/id', $headers, $bodyJSON);
         $response = $this->client->send($request);
     
         return $response->getBody()->getContents();  
