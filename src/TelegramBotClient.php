@@ -88,12 +88,16 @@ class TelegramBotClient{
        
     }
 
-    public function setBot($idBot,$message){
+    public function setBot($idBot,$message,$firstMessage,$secondMessage,$longUrl,$shares){
         
         $body = new \stdClass();
         
         $body->id_bot = $idBot;
         $body->message = $message;
+        $body->first_message = $firstMessage;
+        $body->second_message = $secondMessage;
+        $body->long_url = $longUrl;
+        $body->shares = $shares;
 
         $bodyJSON = json_encode($body);
         
