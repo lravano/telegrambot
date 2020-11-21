@@ -114,23 +114,7 @@ class TelegramBotClient{
     }
 
 
-    public function setMessageBroadcast($idBot,$message){
-        
-        $body = new \stdClass();
-        
-        $body->id_bot = $idBot;
-        $body->message = $message;
 
-        $bodyJSON = json_encode($body);
-        
-        $headers = ['Content-Type' => 'application/json' ];
-        
-        $request = new Request('POST', '/bot/send/message', $headers, $bodyJSON);
-        $response = $this->client->send($request);
-    
-        return $response->getBody()->getContents();  
-       
-    }
 
     public function deleteCustomerBot($idBot){
         
