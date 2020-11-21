@@ -88,7 +88,7 @@ class TelegramBotClient{
        
     }
 
-    public function setBot($idBot,$message,$firstMessage,$secondMessage,$longUrl,$shares){
+    public function setBot($idBot,$message,$firstMessage,$secondMessage,$longUrl,$shares,$longUrlOspite,$messagePromo,$switchPromo){
         
         $body = new \stdClass();
         
@@ -98,12 +98,34 @@ class TelegramBotClient{
         $body->second_message = $secondMessage;
         $body->long_url = $longUrl;
         $body->shares = $shares;
+        $body->long_url_ospite = $longUrlOspite;
+        $body->message_promo = $messagePromo;
+        $body->switch_promo = $switchPromo;
 
         $bodyJSON = json_encode($body);
         
         $headers = ['Content-Type' => 'application/json' ];
         
         $request = new Request('POST', '/bot/set', $headers, $bodyJSON);
+        $response = $this->client->send($request);
+    
+        return $response->getBody()->getContents();  
+       
+    }
+
+
+    public function setMessageBroadcast($idBot,$message){
+        
+        $body = new \stdClass();
+        
+        $body->id_bot = $idBot;
+        $body->message = $message;
+
+        $bodyJSON = json_encode($body);
+        
+        $headers = ['Content-Type' => 'application/json' ];
+        
+        $request = new Request('POST', '/bot/send/message', $headers, $bodyJSON);
         $response = $this->client->send($request);
     
         return $response->getBody()->getContents();  
